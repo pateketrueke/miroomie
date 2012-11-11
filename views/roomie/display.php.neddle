@@ -1,10 +1,32 @@
-img { src => 'http://fraph.facebook.com/' . current_user()->uid . '/picture' }
+- $user = end($user)
 
-p = user_detail('number')
-p = user_detail('username')
-p = user_detail('excerpt')
-p = user_detail('address')
-p = current_user()->is_available
+#profile
+  .table
+    .cell.picture.middle
+      img { src => "http://graph.facebook.com/$user->uid/picture?type=large" }
+      - if is_logged() && ($user->uid == me('id'))
+        a { href => url_for('edit_profile') }
+          Editar perfil
+    .cell.break.detail
+      h3 = user_detail('name', $user)
+      p
+        strong Biografía:
+        span = user_detail('excerpt', $user)
+        - if $user->is_available === 'yes'
+          br
+          strong Dirección:
+          span = user_detail('address', $user)
+          br
+          strong Teléfono:
+          span = user_detail('number', $user)
+          br
+          strong Precio:
+          span = '$', user_detail('price', $user), ' MXN'
+      ul.net.clean
+        li
+          a.facebook { href => user_detail('link', $user) }
+            Facebook
+        - if $twitter = user_detail('username', $user)
+          li
+            a.twitter { href => "http://twitter.com/$twitter" } = "@$twitter"
 
-a { href => url_for('edit_profile') }
-  Editar perfil

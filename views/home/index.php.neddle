@@ -1,2 +1,8 @@
-a { href => url_for('login') }
-  Login with Facebook
+#login
+  .legend
+    h1 Encuentra el lugar ideal para vivir.
+    p
+      Se uno de los primeros en concoer nuestro sitio web,
+      <br>ya sea que busques roomie o una casa.
+    a.connect { href => url_for('login') }
+      Conéctate con Facebook

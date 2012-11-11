@@ -13,36 +13,34 @@ head
   = $head
   = before_body()
   = csrf_meta_tag()
-  link { rel => 'stylesheet', href => 'http://fonts.googleapis.com/css?family=Bangers' }
+  link { rel => 'stylesheet', href => 'http://fonts.googleapis.com/css?family=Muli|Montserrat' }
 body
   #wrapper
-    - if is_logged()
-      header#top
-        a { href => url_for('demo') } Inicio
+    header#top
+      a.logo { href => url_for('demo') } Mi Roomie
+      - if is_logged()
         .table.profile
           .cell
-            img { src => 'http://graph.facebook.com/' . me('id') . '/picture' }
+            a { href => url_for('my_profile') }
+              img { src => 'http://graph.facebook.com/' . me('id') . '/picture' }
           .cell.middle
             a.name { href => url_for('my_profile') }
               = me('name')
             a { href => url_for('logout') }
               Cerrar sesión
-            \/
-            a.pop { href => url_for('view_requests') }
-              Peticiones
-    /
-      - foreach flash() as $type => $val
-        div { class => "flash $type" }
-          - if is_array($val)
-            ul
-              - foreach $val as $one
-                li = $one
-          - else
-            = $val
+          .cell.middle
+            a.pop { href => url_for('view_requests'), title => 'Peticiones' }
+              = Ping::count_by_to_uid(me('id'))
     #content
       section.main = $body
     footer
-      Hecho en #SWGDL &mdash; Nov. 2012
+      ul.social.clean
+        li
+          Desarrollado en Startup Weekend GDL por @pateketrueke @eeelia @mayligon @camarrana @signoretoo
+        li
+          a.facebook { href => 'http://facebook.com/MiRoomie' } Facebook
+        li
+          a.twitter { href => 'http://twitter.com/Mi_Roomie' } Twitter
     script { src => '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' }
     <script>window.jQuery || document.write("<script src='<?php echo asset_url('jquery.min.js'); ?>'>\x3C/script>")</script>
   = after_body()

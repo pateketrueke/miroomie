@@ -1,0 +1,27 @@
+#find { class => params('q') ? 'out' : FALSE }
+  .legend
+    h1 Encuentra el lugar ideal para vivir.
+    p
+      Se uno de los primeros en concoer nuestro sitio web,
+      <br>ya sea que busques roomie o una casa.
+    h1.hidden ¿Dónde te gustaría vivir?
+    = Form::get('', ~>
+      ul
+        li = Form::input('search', 'q', '', array(placeholder => '¿Dónde te gustaría vivir?'))
+        li = Form::input('submit', 'go', 'Buscar')
+
+- if isset($results)
+  ul#results.list
+    - foreach end($results) as $user
+      li
+        .table.extra
+          .cell.middle
+            a { href => url_for('view_profile', array(':id' => $user->uid)) }
+              img.rpad { src => "http://graph.facebook.com/$user->uid/picture", width => 50, height => 50 }
+          .cell.middle.full
+            a { href => url_for('view_profile', array(':id' => $user->uid)) }
+              h3 = $user->details['address']
+              p = $user->details['excerpt']
+          .cell.middle.no-wrap
+            a.action.rpad { href => url_for('create_request', array(':id' => $user->uid)), data-method => 'post' }
+              Me interesa

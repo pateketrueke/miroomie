@@ -3,6 +3,16 @@
 class roomie_controller extends base_controller
 {
 
+  function show()
+  {
+    $this->view['user'] = User::first_by_uid(params('id'));
+  }
+
+  function display()
+  {
+    $this->view['user'] = current_user();
+  }
+
   function update()
   {
     $user = current_user();
@@ -35,7 +45,7 @@ class roomie_controller extends base_controller
     if ($tmp = Ping::first_by_from_uid_and_to_uid($from_uid, $to_uid)) {
       $tmp->delete();
     }
-    redirect();
+    redirect(url_for('view_requests'));
   }
 
   function create_request()
@@ -44,7 +54,7 @@ class roomie_controller extends base_controller
     $from_uid = current_user()->uid;
 
     Ping::find_or_create_by_from_uid_and_to_uid($from_uid, $to_uid);
-    redirect();
+    redirect(url_for('view_requests'));
   }
 
   function accept_request()

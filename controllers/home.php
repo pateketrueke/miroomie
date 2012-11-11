@@ -22,7 +22,7 @@ class home_controller extends base_controller
     foreach (array_keys($_COOKIE) as $one) {
       setcookie($one, '', -time(), '/', \Postman\Request::env('SERVER_NAME'));
     }
-    redirect(FB::get_logout_url(array('next' => 'http://localhost:3332')));
+    redirect(FB::get_logout_url(array('next' => 'http://miroomie.co')));
   }
 
   function index()

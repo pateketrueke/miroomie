@@ -3,11 +3,6 @@
     legend Acerca de mi
     .field
       = Form::field(array(type => 'text',
-                          name => 'detail[number]',
-                          label => 'Número telefónico',
-                          value => user_detail('number')))
-    .field
-      = Form::field(array(type => 'text',
                           name => 'detail[username]',
                           label => 'Cuenta de Twitter (opcional)',
                           value => user_detail('username')))
@@ -20,10 +15,18 @@
     legend Compartir espacio
     .field
       = Form::field(array(type => 'text',
+                          name => 'detail[number]',
+                          label => 'Número telefónico',
+                          value => user_detail('number')))
+    .field
+      = Form::field(array(type => 'text',
                           name => 'detail[address]',
                           label => 'Dirección completa',
                           value => user_detail('address')))
     .field.right
+      label
+        Precio
+          = Form::input('text', 'detail[price]', user_detail('price'))
       label
         Disponible
         = Form::select('available', array(no => 'No', yes => 'Si'), array(default => current_user()->is_available))
