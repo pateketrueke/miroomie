@@ -1,1 +1,2 @@
-HUH?
+a { href => url_for('login') }
+  Login with Facebook

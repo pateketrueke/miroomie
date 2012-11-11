@@ -3,7 +3,34 @@
 class home_controller extends base_controller
 {
 
-  public function index()
+  function login()
+  {
+    try {
+      FB::initialize();
+      if ($set = FB::me()) {
+        session('fb_me', $set);
+      }
+    } catch (Exception $e) {
+      redirect(url_for('login'));
+    }
+    redirect('demo');
+  }
+
+  function logout()
+  {
+    session('fb_me', NULL);
+    foreach (array_keys($_COOKIE) as $one) {
+      setcookie($one, '', -time(), '/', \Postman\Request::env('SERVER_NAME'));
+    }
+    redirect(FB::get_logout_url(array('next' => 'http://localhost:3332')));
+  }
+
+  function index()
+  {
+    is_logged() && redirect(url_for('demo'));
+  }
+
+  function demo()
   {
     if ($q = params('q')) {
       $options['where']['details.address LIKE'] = "%$q%";

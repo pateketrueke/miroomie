@@ -16,19 +16,20 @@ head
   link { rel => 'stylesheet', href => 'http://fonts.googleapis.com/css?family=Bangers' }
 body
   #wrapper
-    header#top
-      a { href => url_for('panel') } Inicio
-      .table.profile
-        .cell
-          img { src => 'http://graph.facebook.com/' . me('id') . '/picture' }
-        .cell.middle
-          a.name { href => url_for('my_profile') }
-            = me('name')
-          a { href => url_for('logout') }
-            Cerrar sesión
-          \/
-          a.pop { href => url_for('view_requests') }
-            Peticiones
+    - if is_logged()
+      header#top
+        a { href => url_for('demo') } Inicio
+        .table.profile
+          .cell
+            img { src => 'http://graph.facebook.com/' . me('id') . '/picture' }
+          .cell.middle
+            a.name { href => url_for('my_profile') }
+              = me('name')
+            a { href => url_for('logout') }
+              Cerrar sesión
+            \/
+            a.pop { href => url_for('view_requests') }
+              Peticiones
     /
       - foreach flash() as $type => $val
         div { class => "flash $type" }
