@@ -19,7 +19,7 @@
           br
           strong Teléfono:
           span = user_detail('number', $user) ?: 'N/A'
-          - if $price = user_detail('price', $user)
+          - if $price = str_replace('$', '', user_detail('price', $user))
             br
             strong Precio:
             span = "$$price MXN"
