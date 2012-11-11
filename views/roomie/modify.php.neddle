@@ -1,0 +1,30 @@
+= Form::post(url_for('save_profile'), ~>
+  fieldset
+    legend Acerca de mi
+    .field
+      = Form::field(array(type => 'text',
+                          name => 'detail[number]',
+                          label => 'Número telefónico',
+                          value => user_detail('number')))
+    .field
+      = Form::field(array(type => 'text',
+                          name => 'detail[username]',
+                          label => 'Cuenta de Twitter (opcional)',
+                          value => user_detail('username')))
+    .field
+      = Form::field(array(type => 'text',
+                          name => 'detail[excerpt]',
+                          label => 'Mini-biografía',
+                          value => user_detail('excerpt')))
+  fieldset
+    legend Compartir espacio
+    .field
+      = Form::field(array(type => 'text',
+                          name => 'detail[address]',
+                          label => 'Dirección completa',
+                          value => user_detail('address')))
+    .field.right
+      label
+        Disponible
+        = Form::select('available', array(no => 'No', yes => 'Si'), array(default => current_user()->is_available))
+  = Form::submit('save', 'Actualizar datos')

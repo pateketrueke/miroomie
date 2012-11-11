@@ -1,0 +1,117 @@
+@import "sauce";
+
+* {
+  .nobox;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  width: 790px;
+  margin: 0 auto;
+}
+
+#top {
+  .clearfix;
+  background: silver;
+  .profile { float: right; }
+  a {
+    &.name { display: block; }
+    margin: 0 5px;
+  }
+  img { margin: 5px 0 0 5px; }
+}
+
+#content {
+  .menu {
+    ul {
+      margin: 0;
+      padding: 0;
+      text-align: right;
+      list-style-type: none;
+      list-style-position: inside;
+      li {
+        display: inline-block;
+        a {
+          background: silver;
+          display: inline-block;
+          &:hover { background: gray; }
+          &.here { background: white; }
+        }
+      }
+    }
+  }
+}
+
+#find {
+  padding: 40px;
+  form { text-align: center; }
+}
+
+.table {
+  display: table;
+}
+
+.cell {
+  white-space: nowrap;
+  display: table-cell;
+  vertical-align: top;
+  &.bottom {
+    vertical-align: bottom;
+  }
+  &.middle {
+    vertical-align: middle;
+  }
+  &.full {
+    width: 100%;
+  }
+  .rpad { margin-right: 10px; }
+  .lpad { margin-left: 10px; }
+}
+
+.action {
+  padding: 5px;
+  border: 1px solid red;
+}
+
+.field {
+  span { display: block; }
+  input {
+    width: 100%;
+    margin: 5px 0;
+    margin-bottom: 10px;
+  }
+  &.right {
+    text-align: right;
+  }
+}
+
+.list {
+  padding: 0;
+  margin: 20px 0;
+  list-style-type: none;
+  list-style-position: inside;
+}
+
+
+figure {
+  margin: 0;
+  figcaption {
+    h3 { margin: 0; }
+    p { margin: 0; }
+  }
+}
+
+input,
+select {
+  padding: 5px;
+  font-size: 1.2em;
+}
+
+footer {
+  font-size: 12px;
+  text-align: center;
+}

@@ -1,0 +1,10 @@
+img { src => 'http://fraph.facebook.com/' . current_user()->uid . '/picture' }
+
+p = user_detail('number')
+p = user_detail('username')
+p = user_detail('excerpt')
+p = user_detail('address')
+p = current_user()->is_available
+
+a { href => url_for('edit_profile') }
+  Editar perfil

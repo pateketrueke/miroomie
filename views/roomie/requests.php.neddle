@@ -1,0 +1,42 @@
+- $set = end($sent_requests)
+
+h1 Sent
+
+- unless $set
+  &mdash; No hay peticiones pendientes
+- else
+  ul#sent_results.list
+    - foreach $set as $one
+      - $user = User::first_by_uid($one->to_uid)
+      p = $user->details['address']
+      p = '@', $user->details['username']
+      img { src => "http://graph.facebook.com/$one->to_uid/picture" }
+      a { href => url_for('cancel_request', array(':id' => $one->to_uid)), data-method => 'post' } Ya no me interesa
+
+
+- $set = end($recvd_requests)
+
+h1 Received
+
+- unless $set
+  &mdash; No hay peticiones pendientes
+- else
+  ul#recvd_results.list
+    - foreach $set as $one
+      li
+        - $user = User::first_by_uid($one->from_uid)
+        .table
+          .cell.middle
+            img.rpad { src => "http://graph.facebook.com/$one->from_uid/picture" }
+          .cell.middle.full
+            p
+              h2
+                a { href => $user->details['link'], target => '_blank' } = $user->details['name']
+              - if ! empty($user->details['username'])
+                - $twitter = $user->details['username']
+                a { href => "http://twitter.com/$twitter", target => '_blank' } = "@$twitter"
+          .cell.middle
+            a.action.lpad { href => url_for('accept_request', array(':id' => $one->from_uid)), data-method => 'post' }
+              Aceptar
+            a.action.lpad { href => url_for('decline_request', array(':id' => $one->from_uid)), data-method => 'post' }
+              Declinar

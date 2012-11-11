@@ -1,0 +1,19 @@
+#find
+  = Form::get('', ~>
+    = Form::input('search', 'q')
+    = Form::input('submit', 'go', 'Buscar')
+
+- if isset($results)
+  ul#results.list
+    - foreach end($results) as $user
+      li
+        figure
+          .table
+            .cell.middle
+              img.rpad { src => "http://graph.facebook.com/$user->uid/picture", width => 50, height => 50 }
+            .cell.middle.full
+              figcaption
+                h3 = $user->details['address']
+                p = $user->details['excerpt']
+            .cell.middle
+              a.action { href => url_for('create_request', array(':id' => $user->uid)), data-method => 'post' } Me interesa

@@ -1,0 +1,51 @@
+- stylesheet_for('app');
+- javascript_for('app');
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+head
+  meta { charset => 'UTF-8' }
+  title = $title
+  = $head
+  = before_body()
+  = csrf_meta_tag()
+  link { rel => 'stylesheet', href => 'http://fonts.googleapis.com/css?family=Bangers' }
+body
+  #wrapper
+    header#top
+      a { href => url_for('panel') } Inicio
+      .table.profile
+        .cell
+          img { src => 'http://graph.facebook.com/' . me('id') . '/picture' }
+        .cell.middle
+          a.name { href => url_for('my_profile') }
+            = me('name')
+          a { href => url_for('logout') }
+            Cerrar sesión
+          \/
+          a.pop { href => url_for('view_requests') }
+            Peticiones
+    /
+      - foreach flash() as $type => $val
+        div { class => "flash $type" }
+          - if is_array($val)
+            ul
+              - foreach $val as $one
+                li = $one
+          - else
+            = $val
+    #content
+      section.main = $body
+    footer
+      Hecho en #SWGDL &mdash; Nov. 2012
+    script { src => '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' }
+    <script>window.jQuery || document.write("<script src='<?php echo asset_url('jquery.min.js'); ?>'>\x3C/script>")</script>
+  = after_body()
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
