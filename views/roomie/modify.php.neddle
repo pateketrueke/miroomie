@@ -1,33 +1,66 @@
 = Form::post(url_for('save_profile'), ~>
-  fieldset
-    legend Acerca de mi
-    .field
-      = Form::field(array(type => 'text',
-                          name => 'detail[username]',
-                          label => 'Cuenta de Twitter (opcional)',
-                          value => user_detail('username')))
-    .field
-      = Form::field(array(type => 'text',
-                          name => 'detail[excerpt]',
-                          label => 'Mini-biografía',
-                          value => user_detail('excerpt')))
-  fieldset
-    legend Compartir espacio
-    .field
-      = Form::field(array(type => 'text',
-                          name => 'detail[number]',
-                          label => 'Número telefónico',
-                          value => user_detail('number')))
-    .field
-      = Form::field(array(type => 'text',
-                          name => 'detail[address]',
-                          label => 'Dirección completa',
-                          value => user_detail('address')))
-    .field.right
-      label
-        Precio
-          = Form::input('text', 'detail[price]', user_detail('price'))
-      label
-        Disponible
-        = Form::select('available', array(no => 'No', yes => 'Si'), array(default => current_user()->is_available))
-  = Form::submit('save', 'Actualizar datos')
+  #profile
+    .table
+      .cell.myself
+        fieldset
+          legend
+            h3 Acerca de mi
+          .field
+            = Form::field(array(type => 'textarea',
+                                name => 'detail[excerpt]',
+                                value => user_detail('excerpt'),
+                                options => array(placeholder => 'Descríbete brevemente', cols => 24, rows => 2)))
+          .field
+            = Form::field(array(type => 'text',
+                                name => 'detail[homepage]',
+                                label => 'Pagina web (opcional)',
+                                value => user_detail('homepage'),
+                                options => array(placeholder => 'http://')))
+          .field
+            = Form::field(array(type => 'text',
+                                name => 'detail[username]',
+                                label => 'Usuario de Twiter (opcional)',
+                                value => user_detail('username'),
+                                options => array(placeholder => '@')))
+          .field
+            = Form::field(array(type => 'text',
+                                name => 'detail[number]',
+                                label => 'Teléfono',
+                                value => user_detail('number'),
+                                options => array(placeholder => '01 234 567')))
+          label
+            span Quiero compartir:
+            = Form::select('available', array(no => 'No', yes => 'Si'), array(default => current_user()->is_available))
+        .done
+          = Form::submit('save', 'Actualizar')
+      .cell.myplace
+        fieldset
+          legend
+            h3 Ingresa tus datos
+          .field
+            = Form::field(array(type => 'text',
+                                name => 'detail[address]',
+                                label => 'Dirección',
+                                value => user_detail('address'),
+                                options => array(placeholder => 'Calle, número y colonia')))
+          .field
+            = Form::field(array(type => 'textarea',
+                                name => 'detail[home]',
+                                label => 'Información',
+                                value => user_detail('home'),
+                                options => array(placeholder => 'Baños, áreas comunes, jardin, cocina, refrigerador, etc.', cols => 24, rows => 3)))
+          .field
+            = Form::field(array(type => 'textarea',
+                                name => 'detail[extra]',
+                                label => 'Información adicional',
+                                value => user_detail('extra'),
+                                options => array(placeholder => 'Cuotas de mantenimiento, mascotas, stacionamiento, etc.', cols => 24, rows => 3)))
+          .table
+            span.cell.middle.field
+              label Precio
+            span.cell.field.middle
+              = Form::input('text', 'detail[price]', user_detail('price'), array(size => 4, placeholder => '$650.00', class => 'small'))
+            span.cell.field.middle
+              = Form::select('available', array(1 => 'Mensual', 6 => 'Semestral'), array(default => 1))
+        .done
+          = Form::submit('save', 'Compartir')

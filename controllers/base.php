@@ -3,6 +3,6 @@
 class base_controller extends \Sauce\App\Controller
 {
 
-  public $title = 'Roomie';
+  public $title = 'Mi Roomie | Busca, conecta y comparte.';
 
 }

@@ -10,18 +10,23 @@
     .cell.break.detail
       h3 = user_detail('name', $user)
       p
-        strong Biografía:
-        span = user_detail('excerpt', $user)
+        strong Acerca de:
+        span = user_detail('excerpt', $user) ?: 'N/A'
         - if $user->is_available === 'yes'
           br
           strong Dirección:
-          span = user_detail('address', $user)
+          span = user_detail('address', $user) ?: 'N/A'
           br
           strong Teléfono:
-          span = user_detail('number', $user)
-          br
-          strong Precio:
-          span = '$', user_detail('price', $user), ' MXN'
+          span = user_detail('number', $user) ?: 'N/A'
+          - if $price = user_detail('price', $user)
+            br
+            strong Precio:
+            span = "$$price MXN"
+          - if $extra = user_detail('extra', $user)
+            br
+            strong Extra:
+            span = $extra
       ul.net.clean
         li
           a.facebook { href => user_detail('link', $user) }

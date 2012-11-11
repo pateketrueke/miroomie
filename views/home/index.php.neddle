@@ -2,7 +2,7 @@
   .legend
     h1 Encuentra el lugar ideal para vivir.
     p
-      Se uno de los primeros en concoer nuestro sitio web,
-      <br>ya sea que busques roomie o una casa.
+      Se uno de los primeros en conocer nuestra aplicación web,
+      <br>ya sea que busques roomie o un lugar para vivir.
     a.connect { href => url_for('login') }
       Conéctate con Facebook

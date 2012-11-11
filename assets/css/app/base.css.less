@@ -209,11 +209,11 @@ dl.inline dd + dd {
 .cell {
   display: table-cell;
   vertical-align: top;
+  &.full { width: 100%; }
   &.no-wrap { white-space: nowrap; }
   &.bottom { vertical-align: bottom; }
   &.middle { vertical-align: middle; }
   &.rsep { padding-right: 20px; }
-  &.full { width: 100%; }
   .rpad { margin-right: 10px; }
   .lpad { margin-left: 10px; }
   .title {
@@ -238,6 +238,7 @@ dl.inline dd + dd {
 }
 
 .field {
+  margin-top: 10px;
   span { display: block; }
   input {
     width: 100%;
@@ -247,6 +248,7 @@ dl.inline dd + dd {
   &.right {
     text-align: right;
   }
+  label, input, textarea, select { font-family: Muli; }
 }
 
 .list {
@@ -289,12 +291,58 @@ dl.inline dd + dd {
   display: none;
 }
 
+legend {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  h2,h3 {
+    margin: 0;
+  }
+}
+
+.myself {
+  padding: 20px;
+  background: white;
+  .field {
+    input, textarea { width: 260px; }
+  }
+  label {
+    span { font-family: Muli; }
+  }
+}
+
+.myplace {
+  padding: 20px;
+  legend { text-align: right; }
+  .field {
+    input, textarea { width: 340px; }
+    .small { width: 120px; margin: 0 10px; }
+  }
+}
+
+.done {
+  margin-top: 20px;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  legend {
+    display: block;
+    font-family: Montserrat;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #000;
+  }
+}
 
 input,
-select {
+select,
+textarea {
   padding: 5px;
-  font-size: 1.2em;
+  font-size: 1em;
 }
+
 
 footer {
   color: white;
