@@ -1,0 +1,5 @@
+#finish
+  = image_tag('roomie.png')
+  h1 ¡Bingo!
+  h2 Encontraste roomie
+  p continuará...

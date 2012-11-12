@@ -61,6 +61,6 @@
             span.cell.field.middle
               = Form::input('text', 'detail[price]', user_detail('price'), array(size => 4, placeholder => '$650.00', class => 'small'))
             span.cell.field.middle
-              = Form::select('available', array(1 => 'Mensual', 6 => 'Semestral'), array(default => 1))
+              = Form::select('detail[payment]', array(1 => 'Mensual', 6 => 'Semestral'), array(default => 1))
         .done
           = Form::submit('save', 'Compartir')
