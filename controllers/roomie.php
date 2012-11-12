@@ -61,9 +61,9 @@ class roomie_controller extends base_controller
   {
     $from_uid = params('id');
     $to_uid = current_user()->uid;
-    die('AQUI HACEMOS LO QUE FALTA');
-    Ping::find_or_create_by_from_uid_and_to_uid($from_uid, $to_uid);
-    redirect(url_for('view_requests'));
+    #die('AQUI HACEMOS LO QUE FALTA');
+    //Ping::find_or_create_by_from_uid_and_to_uid($from_uid, $to_uid);
+    redirect(url_for('check_request', array(':id' => $to_uid)));
   }
 
   function decline_request()
